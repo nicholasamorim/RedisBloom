@@ -12,9 +12,13 @@ LD=gcc
 
 # Compile flags for linux / osx
 ifeq ($(uname_S),Linux)
+	CC=gcc
+	LD=gcc
 	SHOBJ_CFLAGS ?=  -fno-common -g -ggdb
 	SHOBJ_LDFLAGS ?= -shared -Wl,-Bsymbolic,-Bsymbolic-functions
 else
+	CC=clang
+	LD=clang
 	CFLAGS += -mmacosx-version-min=10.6
 	SHOBJ_CFLAGS ?= -dynamic -fno-common -g -ggdb
 	SHOBJ_LDFLAGS ?= -dylib -exported_symbol _RedisModule_OnLoad -macosx_version_min 10.6
